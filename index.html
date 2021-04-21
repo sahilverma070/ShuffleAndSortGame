@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shuffle And Sort</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body onload="loadData()">
+  <div class="header-footer"><strong>Shuffle and Sort</strong></div>
+  <div class="parentContainer">
+    <div class="data-section">
+      <div id="myAppData"></div>
+    </div>
+    <div class="buttons-section">
+      <input type="button" value="SHUFFLE" onclick="shuffle()">
+      <input type="button" value="SORT" onclick="sort()">
+    </div>
+  </div>
+  <div class="header-footer">Shuffle and sort by Sahil Verma</div>
+  <script>
+    const originalList = [
+      {
+        value: 1,
+        color: "#6F98A8",
+      },
+      {
+        value: 2,
+        color: "#2B8EAD",
+      },
+      {
+        value: 3,
+        color: "#2F454E",
+      },
+      {
+        value: 4,
+        color: "#2B8EAD",
+      },
+      {
+        value: 5,
+        color: "#2F454E",
+      },
+      {
+        value: 6,
+        color: "#BFBFBF",
+      },
+      {
+        value: 7,
+        color: "#BFBFBF",
+      },
+      {
+        value: 8,
+        color: "#6F98A8",
+      },
+      {
+        value: 9,
+        color: "#2F454E",
+      },
+    ];
+
+    function loadData(listRef) {
+      let myApp = document.querySelector("#myAppData");
+      var listToRefer = listRef ? listRef : originalList;
+      myApp.innerHTML =
+        '<ul class="my-container">' +
+        listToRefer
+          .map((item) => {
+            return `<li class='my-item' style=background-color:${item?.color};> ${item?.value}</li>`;
+          }).join('') + '</ul>';
+    }
+
+    function shuffle() {
+      const shuffledList = [...originalList];
+      shuffledList.forEach((item, index) => {
+        const randomIndex = Math.floor(Math.random() * (index));
+        [shuffledList[index], shuffledList[randomIndex]] = [shuffledList[randomIndex], shuffledList[index]];
+      });
+      this.loadData(shuffledList);
+    }
+
+    function sort() {
+      this.loadData([...originalList.sort()]);
+    }
+  </script>
+</body>
+
+</html>
